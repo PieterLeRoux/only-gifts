@@ -119,9 +119,20 @@ function BirthdayCard({
           ? 'rd'
           : 'th'
 
+  // Confetti pieces — fall continuously over the card.
+  // Each piece picks a horizontal start, a color, a duration, and a delay.
+  const confettiColors = ['#FCAF45', '#FD1D1D', '#E1306C', '#833AB4', '#10B981']
+  const confettiPieces = Array.from({ length: 14 }, (_, i) => ({
+    left: `${(i * 7.3 + 3) % 95}%`,
+    bg: confettiColors[i % confettiColors.length],
+    delay: `${(i * 0.45) % 4}s`,
+    duration: `${3 + (i % 4) * 0.5}s`,
+    skew: `${(i % 2 === 0 ? 1 : -1) * 12}deg`,
+  }))
+
   return (
     <div
-      className="relative overflow-hidden rounded-3xl mt-7 mx-auto max-w-lg p-7 sm:p-8 text-center"
+      className="relative overflow-hidden rounded-2xl mt-6 mx-auto max-w-md p-5 sm:p-6 text-center"
       style={{
         background:
           'linear-gradient(135deg, rgba(252, 175, 69, 0.10) 0%, rgba(225, 48, 108, 0.10) 50%, rgba(131, 58, 180, 0.10) 100%)',
@@ -129,46 +140,50 @@ function BirthdayCard({
         boxShadow: '0 12px 36px rgba(225, 48, 108, 0.10)',
       }}
     >
-      {/* Confetti decoration */}
+      {/* Falling confetti — pure CSS, looped. */}
+      {confettiPieces.map((p, i) => (
+        <span
+          key={i}
+          className="confetti-piece"
+          style={{
+            left: p.left,
+            background: p.bg,
+            animationDelay: p.delay,
+            animationDuration: p.duration,
+            transform: `skewX(${p.skew})`,
+          }}
+          aria-hidden="true"
+        />
+      ))}
+
+      {/* Static emoji accents */}
       <div
-        className="absolute -top-2 -right-2 text-3xl select-none pointer-events-none"
+        className="absolute -top-1 -right-1 text-2xl select-none pointer-events-none"
         aria-hidden="true"
         style={{ transform: 'rotate(20deg)' }}
       >
         🎉
       </div>
       <div
-        className="absolute -bottom-3 -left-3 text-3xl select-none pointer-events-none"
+        className="absolute -bottom-2 -left-2 text-2xl select-none pointer-events-none"
         aria-hidden="true"
         style={{ transform: 'rotate(-15deg)' }}
       >
         🎂
       </div>
-      <div
-        className="absolute top-4 left-6 text-base select-none pointer-events-none opacity-70"
-        aria-hidden="true"
-      >
-        ✨
-      </div>
-      <div
-        className="absolute bottom-6 right-5 text-base select-none pointer-events-none opacity-70"
-        aria-hidden="true"
-      >
-        🎈
-      </div>
 
       {/* Content */}
       <div className="relative">
-        <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-rose mb-2">
+        <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-rose mb-1.5">
           Birthday
         </div>
-        <div className="text-3xl sm:text-4xl font-bold tracking-tight text-ink leading-tight">
+        <div className="text-2xl sm:text-3xl font-bold tracking-tight text-ink leading-tight">
           {day}
-          <sup className="text-base text-rose ml-0.5">{ord}</sup> of {month}
+          <sup className="text-sm text-rose ml-0.5">{ord}</sup> of {month}
         </div>
         {turningAge && (
           <div
-            className="mt-2 text-base sm:text-lg font-semibold"
+            className="mt-1.5 text-sm sm:text-base font-semibold"
             style={{
               background:
                 'linear-gradient(90deg, #FCAF45, #E1306C, #833AB4)',
@@ -182,14 +197,14 @@ function BirthdayCard({
         )}
 
         {/* Countdown pill */}
-        <div className="mt-5 inline-flex items-center gap-2 bg-white/90 backdrop-blur rounded-full px-4 py-1.5 shadow-card border border-rose/20">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted">
+        <div className="mt-4 inline-flex items-center gap-2 bg-white/90 backdrop-blur rounded-full px-3.5 py-1 shadow-card border border-rose/20">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">
             In
           </span>
-          <span className="text-lg font-bold tabular-nums text-rose">
+          <span className="text-base font-bold tabular-nums text-rose">
             {days}
           </span>
-          <span className="text-xs font-semibold text-muted">days</span>
+          <span className="text-[10px] font-semibold text-muted">days</span>
         </div>
       </div>
     </div>

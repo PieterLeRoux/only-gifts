@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import {
-  Gift as GiftIcon,
   ExternalLink,
   Plus,
   Eye,
@@ -14,6 +13,7 @@ import {
 import { MOCK_USERS, poolRaised } from '@/lib/mock-data'
 import { cn, formatCurrency, daysUntil } from '@/lib/utils'
 import { CopyableLink } from '@/components/share-button'
+import { Logo } from '@/components/logo'
 
 /**
  * Owner dashboard mock. Reads the "pieter" user as if they were signed in.
@@ -30,10 +30,7 @@ export default function DashboardPage() {
       {/* Top nav */}
       <nav className="sticky top-0 z-30 backdrop-blur-md bg-cream/85 border-b border-line/60">
         <div className="max-w-3xl mx-auto px-5 sm:px-7 h-14 flex items-center justify-between">
-          <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-bold text-ink">
-            <GiftIcon className="w-4 h-4 text-rose" />
-            Only Gifts
-          </Link>
+          <Logo />
           <Link
             href={`/${user.username}`}
             className="inline-flex items-center gap-1.5 rounded-full bg-white border border-line text-ink px-3.5 py-2 text-xs font-semibold hover:border-ink transition-colors"

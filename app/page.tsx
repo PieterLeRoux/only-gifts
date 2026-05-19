@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Gift, Instagram, ArrowRight, Heart, Users, Sparkles } from 'lucide-react'
+import { Logo } from '@/components/logo'
 
 export default function LandingPage() {
   return (
@@ -7,10 +8,7 @@ export default function LandingPage() {
       {/* Nav */}
       <nav className="px-5 sm:px-7 pt-5">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-bold text-ink">
-            <Gift className="w-4 h-4 text-rose" />
-            Only Gifts
-          </Link>
+          <Logo />
           <Link
             href="/signup"
             className="rounded-full bg-ink text-cream px-4 py-2 text-xs font-semibold hover:bg-rose hover:shadow-rose transition-all"
@@ -134,9 +132,8 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="px-5 sm:px-7 py-10 border-t border-line">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-muted">
-          <div className="inline-flex items-center gap-1.5">
-            <Gift className="w-3.5 h-3.5 text-rose" />
-            <span className="font-bold text-ink">Only Gifts</span>
+          <div className="inline-flex items-center gap-2">
+            <Logo href={null} />
             <span>· a thing by Accenzio</span>
           </div>
           <div>© {new Date().getFullYear()} Accenzio LLC.</div>

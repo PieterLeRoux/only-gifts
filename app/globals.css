@@ -43,6 +43,49 @@ a {
   background-size: 18px 18px;
 }
 
+/* ============================================================
+   Confetti animation — used by the birthday card.
+   Pieces fall from above the card and loop. Pure CSS, no JS.
+   ============================================================ */
+.confetti-piece {
+  position: absolute;
+  top: -10%;
+  width: 8px;
+  height: 12px;
+  border-radius: 1px;
+  opacity: 0;
+  pointer-events: none;
+  animation-name: confetti-fall;
+  animation-timing-function: cubic-bezier(0.2, 0.6, 0.4, 1);
+  animation-iteration-count: infinite;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200px) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confetti-piece {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
 /* Scrollbar polish (desktop only) */
 @media (min-width: 768px) {
   ::-webkit-scrollbar {

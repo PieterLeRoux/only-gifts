@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { Gift as GiftIcon, Sparkles, ArrowLeft } from 'lucide-react'
+import { Sparkles, ArrowLeft } from 'lucide-react'
 import { MOCK_USERS } from '@/lib/mock-data'
 import { ProfileHeader } from '@/components/profile-header'
 import { GiftCard } from '@/components/gift-card'
 import { ShareButton } from '@/components/share-button'
+import { Logo } from '@/components/logo'
 
 export async function generateStaticParams() {
   return Object.keys(MOCK_USERS).map((username) => ({ username }))
@@ -51,13 +52,7 @@ export default async function PublicRegistryPage({
       {/* Top nav strip */}
       <nav className="sticky top-0 z-30 backdrop-blur-md bg-cream/85 border-b border-line/60">
         <div className="max-w-2xl mx-auto px-5 sm:px-7 h-14 flex items-center justify-between">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-rose transition-colors"
-          >
-            <GiftIcon className="w-4 h-4" />
-            Only Gifts
-          </Link>
+          <Logo />
           <ShareButton url={`https://${shareUrl}`} />
         </div>
       </nav>

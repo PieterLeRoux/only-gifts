@@ -134,7 +134,7 @@ export const MOCK_USERS: Record<string, User> = {
           'For the cigar bar nights. Dominican, full-bodied, smooth. Goes great with the Glenmorangie.',
         price: 129,
         imageUrl:
-          'https://images.unsplash.com/photo-1567047773837-f30c69b69d2b?auto=format&fit=crop&w=900&q=80',
+          'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=900&q=80',
         buyUrl: 'https://www.famous-smoke.com/davidoff+robusto+intenso',
       },
       {
@@ -196,7 +196,7 @@ export const MOCK_USERS: Record<string, User> = {
           'For the train. For the gym. For drowning out the open-plan office.',
         price: 549,
         imageUrl:
-          'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f37?auto=format&fit=crop&w=900&q=80',
+          'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80',
         buyUrl: 'https://www.apple.com/shop/buy-airpods/airpods-max',
         contributions: [
           { name: 'Maya R.', amount: 80 },

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Gift, Instagram, ArrowRight, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { Logo } from '@/components/logo'
 
 /**
  * Mock signup flow.
@@ -44,10 +45,7 @@ export default function SignupPage() {
       {/* Top */}
       <nav className="px-5 sm:px-7 pt-5">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
-          <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-bold text-ink">
-            <Gift className="w-4 h-4 text-rose" />
-            Only Gifts
-          </Link>
+          <Logo />
         </div>
       </nav>
 
