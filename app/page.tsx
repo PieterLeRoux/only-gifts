@@ -50,7 +50,7 @@ export default function LandingPage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              href="/pieter"
+              href="/lerouxp_"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-white border border-line text-ink px-6 py-4 text-base font-semibold hover:border-ink transition-colors"
             >
               See an example

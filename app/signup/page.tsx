@@ -7,18 +7,31 @@ import { Gift, Instagram, ArrowRight, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 /**
- * Mock signup flow — Instagram-style auth UI but doesn't actually
- * authenticate. Two steps then drops you in the dashboard.
+ * Mock signup flow.
+ *
+ * Step 1 — "Continue with Instagram" (decorative — we'd hit Meta OAuth
+ *          here in production). On click, we pretend the OAuth returned
+ *          and we've got the IG handle.
+ * Step 2 — Confirm handle (pre-filled from IG, read-only) + birthday.
+ *
+ * Critically: the user does NOT choose a handle. Their URL on Only Gifts
+ * is always onlygifts.app/@<their-instagram-handle>. One identity, one
+ * link, no rename game.
  */
 export default function SignupPage() {
   const router = useRouter()
-  const [step, setStep] = useState<'auth' | 'profile'>('auth')
+  const [step, setStep] = useState<'auth' | 'confirm'>('auth')
+  // Pretend the IG OAuth flow returned this handle. In production this
+  // would be the actual handle from the Meta token.
   const [handle, setHandle] = useState('')
   const [birthday, setBirthday] = useState('')
 
-  function handleAuth() {
-    // Mock the Instagram OAuth flash — short pause, then advance.
-    setTimeout(() => setStep('profile'), 500)
+  function handleInstagramAuth() {
+    // Mock: pretend we just authenticated and got `lerouxp_` from Meta.
+    setTimeout(() => {
+      setHandle('lerouxp_')
+      setStep('confirm')
+    }, 600)
   }
 
   function handleSubmit(e: React.FormEvent) {
@@ -44,7 +57,7 @@ export default function SignupPage() {
           <div className="flex items-center justify-center gap-2 mb-8">
             <Dot active={step === 'auth'} done={step !== 'auth'} />
             <div className="h-px w-8 bg-line" />
-            <Dot active={step === 'profile'} done={false} />
+            <Dot active={step === 'confirm'} done={false} />
           </div>
 
           {step === 'auth' ? (
@@ -56,34 +69,26 @@ export default function SignupPage() {
                 <h1 className="text-2xl font-bold tracking-tight text-ink mb-1">
                   Make your birthday list
                 </h1>
-                <p className="text-sm text-muted">
-                  We&apos;ll use your IG handle as your public URL.
+                <p className="text-sm text-muted leading-relaxed">
+                  Sign in with Instagram. Your handle becomes your link.
+                  <br />
+                  <span className="text-ink font-semibold">
+                    onlygifts.app/@yourhandle
+                  </span>
                 </p>
               </div>
 
               <button
-                onClick={handleAuth}
+                onClick={handleInstagramAuth}
                 className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-ink text-cream py-4 text-base font-semibold hover:bg-rose hover:shadow-rose active:scale-[0.98] transition-all"
               >
                 <Instagram className="w-5 h-5" />
                 Continue with Instagram
               </button>
 
-              <div className="my-5 flex items-center gap-3">
-                <div className="flex-1 h-px bg-line" />
-                <span className="text-[10px] font-bold uppercase tracking-wider text-muted">or</span>
-                <div className="flex-1 h-px bg-line" />
-              </div>
-
-              <button
-                onClick={handleAuth}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-white border border-line text-ink py-4 text-base font-semibold hover:border-ink transition-colors"
-              >
-                Continue with email
-              </button>
-
               <p className="text-[11px] text-muted text-center mt-6 leading-relaxed">
-                Demo: this is just a mock. Nothing is sent or stored.
+                Demo: this is a mock — clicking advances to the next step
+                with <code className="text-ink">@lerouxp_</code> filled in.
               </p>
             </div>
           ) : (
@@ -93,62 +98,50 @@ export default function SignupPage() {
             >
               <div className="text-center mb-7">
                 <h1 className="text-2xl font-bold tracking-tight text-ink mb-1">
-                  Almost there.
+                  Welcome, @{handle}.
                 </h1>
                 <p className="text-sm text-muted">
-                  Two things and your list is live.
+                  When&apos;s your birthday?
                 </p>
               </div>
 
-              <div className="space-y-5 mb-6">
-                <div>
-                  <label
-                    htmlFor="handle"
-                    className="block text-xs font-bold text-ink mb-2 uppercase tracking-wider"
-                  >
-                    Your handle
-                  </label>
-                  <div className="relative">
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-muted">
-                      onlygifts.app/@
-                    </div>
-                    <input
-                      id="handle"
-                      type="text"
-                      required
-                      value={handle}
-                      onChange={(e) => setHandle(e.target.value.replace(/[^a-zA-Z0-9_]/g, ''))}
-                      placeholder="pieter"
-                      autoCapitalize="none"
-                      autoCorrect="off"
-                      className="w-full rounded-xl border border-line bg-white pl-[125px] pr-4 py-3.5 text-base text-ink placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-rose/30 focus:border-rose"
-                    />
+              {/* Confirmed handle — read-only, pulled from IG */}
+              <div className="rounded-xl bg-rose-tint/40 border border-rose/20 p-3 mb-5 flex items-center gap-3">
+                <Instagram className="w-4 h-4 text-rose flex-shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-rose mb-0.5">
+                    Your link
+                  </div>
+                  <div className="text-sm font-mono text-ink truncate">
+                    onlygifts.app/@{handle}
                   </div>
                 </div>
-                <div>
-                  <label
-                    htmlFor="birthday"
-                    className="block text-xs font-bold text-ink mb-2 uppercase tracking-wider"
-                  >
-                    Your birthday
-                  </label>
-                  <input
-                    id="birthday"
-                    type="date"
-                    required
-                    value={birthday}
-                    onChange={(e) => setBirthday(e.target.value)}
-                    className="w-full rounded-xl border border-line bg-white px-4 py-3.5 text-base text-ink focus:outline-none focus:ring-2 focus:ring-rose/30 focus:border-rose"
-                  />
-                </div>
+                <Check className="w-4 h-4 text-mint flex-shrink-0" strokeWidth={3} />
+              </div>
+
+              <div className="mb-6">
+                <label
+                  htmlFor="birthday"
+                  className="block text-xs font-bold text-ink mb-2 uppercase tracking-wider"
+                >
+                  Your birthday
+                </label>
+                <input
+                  id="birthday"
+                  type="date"
+                  required
+                  value={birthday}
+                  onChange={(e) => setBirthday(e.target.value)}
+                  className="w-full rounded-xl border border-line bg-white px-4 py-3.5 text-base text-ink focus:outline-none focus:ring-2 focus:ring-rose/30 focus:border-rose"
+                />
               </div>
 
               <button
                 type="submit"
-                disabled={!handle || !birthday}
+                disabled={!birthday}
                 className={cn(
                   'w-full inline-flex items-center justify-center gap-2 rounded-2xl py-4 text-base font-semibold transition-all',
-                  handle && birthday
+                  birthday
                     ? 'bg-ink text-cream hover:bg-rose hover:shadow-rose active:scale-[0.98]'
                     : 'bg-line/60 text-muted cursor-not-allowed',
                 )}

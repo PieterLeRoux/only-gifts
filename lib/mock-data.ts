@@ -24,13 +24,17 @@ export type Gift = {
 }
 
 export type User = {
+  /**
+   * Always equal to the user's Instagram handle. This is the URL slug AND
+   * the IG handle — there is no separate "choose a username" step. When a
+   * user signs up with Instagram, we read their handle and use it directly.
+   */
   username: string
   displayName: string
   /** YYYY-MM-DD format. */
   birthday: string
   bio: string
   avatarUrl?: string
-  instagramHandle?: string
   venmoHandle?: string
   cashAppHandle?: string
   paypalHandle?: string
@@ -45,17 +49,17 @@ export type User = {
 // ---------------------------------------------------------------------------
 
 export const MOCK_USERS: Record<string, User> = {
-  pieter: {
-    username: 'pieter',
+  lerouxp_: {
+    username: 'lerouxp_',
     displayName: 'Pieter Le Roux',
-    birthday: '2026-07-18',
-    bio: 'Austin, TX · Building AI things · Looking for a Bose moment',
-    instagramHandle: 'pieterleroux',
+    birthday: '2026-08-09',
+    bio: 'Austin, TX · Turning 34 · AI systems architect',
+    avatarUrl: '/pieter-avatar.png',
     venmoHandle: 'pieter-leroux',
     cashAppHandle: 'pieterleroux',
     paypalHandle: 'pieterleroux',
     note:
-      'I never know what to ask for, so I made a list. Anything off this means more than you know — and if you just send me a happy birthday text, that counts too.',
+      'Turning 34 on August 9. I never know what to ask for, so I made a list. Anything off this means more than you know — and if you just send me a happy birthday text, that counts too.',
     gifts: [
       {
         id: 'g1',
@@ -126,12 +130,11 @@ export const MOCK_USERS: Record<string, User> = {
     ],
   },
 
-  demo: {
-    username: 'demo',
+  sarah_k_: {
+    username: 'sarah_k_',
     displayName: 'Sarah K.',
     birthday: '2026-06-04',
     bio: 'Brooklyn · Editor · Mid-thirties and finally making a list',
-    instagramHandle: 'sarahk',
     venmoHandle: 'sarah-k',
     cashAppHandle: 'sarahk',
     note:

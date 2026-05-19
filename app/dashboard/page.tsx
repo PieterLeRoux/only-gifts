@@ -20,7 +20,7 @@ import { CopyableLink } from '@/components/share-button'
  * All add/edit/delete actions are inert — purely for the demo.
  */
 export default function DashboardPage() {
-  const user = MOCK_USERS.pieter
+  const user = MOCK_USERS.lerouxp_
   const [gifts, setGifts] = useState(user.gifts)
   const days = daysUntil(user.birthday)
   const url = `onlygifts.app/@${user.username}`

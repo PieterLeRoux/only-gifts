@@ -17,16 +17,19 @@ export function ProfileHeader({ user }: { user: User }) {
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink leading-tight">
             {user.displayName}
           </h1>
-          {user.instagramHandle && (
-            <a
-              href={`https://instagram.com/${user.instagramHandle}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm text-muted mt-1 hover:text-ink transition-colors"
-            >
-              <Instagram className="w-3.5 h-3.5" />
-              @{user.instagramHandle}
-            </a>
+          <a
+            href={`https://instagram.com/${user.username}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-sm text-muted mt-1 hover:text-ink transition-colors"
+          >
+            <Instagram className="w-3.5 h-3.5" />
+            @{user.username}
+          </a>
+          {user.bio && (
+            <p className="text-sm text-muted mt-1.5 leading-snug">
+              {user.bio}
+            </p>
           )}
         </div>
       </div>
