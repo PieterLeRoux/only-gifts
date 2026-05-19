@@ -129,13 +129,14 @@ export const MOCK_USERS: Record<string, User> = {
       {
         id: 'g4',
         type: 'item',
-        title: 'Davidoff Robusto Intenso — 5 pack',
+        title: 'Wilson Pro Staff 97 v14',
         description:
-          'For the cigar bar nights. Dominican, full-bodied, smooth. Goes great with the Glenmorangie.',
-        price: 129,
+          'Just picked up tennis. Ready to size up from the entry racket. 315g, 16x19 string pattern.',
+        price: 269,
         imageUrl:
-          'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=900&q=80',
-        buyUrl: 'https://www.famous-smoke.com/davidoff+robusto+intenso',
+          'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=900&q=80',
+        buyUrl:
+          'https://www.tennis-warehouse.com/Wilson_Pro_Staff_97_v14/descpageRCWILSON-PS97V14.html',
       },
       {
         id: 'g5',

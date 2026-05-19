@@ -32,11 +32,12 @@ export function Logo({
       <span
         className={cn(
           sizes.icon,
-          'rounded-xl flex items-center justify-center shadow-rose transition-transform group-hover:-rotate-6',
+          'rounded-xl flex items-center justify-center transition-transform group-hover:-rotate-6',
         )}
         style={{
           background:
             'linear-gradient(135deg, #FCAF45 0%, #FD1D1D 40%, #E1306C 70%, #833AB4 100%)',
+          boxShadow: '0 2px 8px rgba(225, 48, 108, 0.18)',
         }}
       >
         <GiftBox className="text-white" />
