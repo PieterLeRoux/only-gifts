@@ -27,6 +27,19 @@ export async function generateMetadata({
       description:
         user.note ?? `Help make ${user.displayName.split(' ')[0]}'s birthday.`,
       type: 'profile',
+      images: [
+        {
+          url: '/og.png',
+          width: 1024,
+          height: 541,
+          alt: `${user.displayName}'s Birthday List — Only Gifts`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${user.displayName}'s birthday list`,
+      images: ['/og.png'],
     },
   }
 }

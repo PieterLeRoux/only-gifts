@@ -11,6 +11,21 @@ export const metadata: Metadata = {
     description:
       'A gift list for the people who actually like you. Drop it in your IG bio. Done.',
     type: 'website',
+    images: [
+      {
+        url: '/og.png',
+        width: 1024,
+        height: 541,
+        alt: "Pieter's Birthday List — Only Gifts",
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Only Gifts — your birthday wishlist, in your IG bio',
+    description:
+      'A gift list for the people who actually like you. Drop it in your IG bio.',
+    images: ['/og.png'],
   },
 }
 
