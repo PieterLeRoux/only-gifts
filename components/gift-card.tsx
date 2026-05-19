@@ -3,15 +3,19 @@
 import { useState } from 'react'
 import { Check, Gift as GiftIcon, ExternalLink, Users, Heart } from 'lucide-react'
 import { cn, formatCurrency } from '@/lib/utils'
-import type { Gift, User } from '@/lib/mock-data'
+import { type Gift, type User, poolRaised } from '@/lib/mock-data'
 import { ActionSheet } from './action-sheet'
+import { ContributorsPopover } from './contributors-popover'
 
 export function GiftCard({ gift, owner }: { gift: Gift; owner: User }) {
   const [sheetOpen, setSheetOpen] = useState(false)
   const isClaimed = gift.type === 'item' && !!gift.claimed
+
+  const contributions = gift.contributions ?? []
+  const raised = poolRaised(gift)
   const poolPct =
-    gift.type === 'pool' && gift.pool
-      ? Math.min(100, Math.round((gift.pool.raised / gift.price) * 100))
+    gift.type === 'pool'
+      ? Math.min(100, Math.round((raised / gift.price) * 100))
       : 0
 
   return (
@@ -20,7 +24,7 @@ export function GiftCard({ gift, owner }: { gift: Gift; owner: User }) {
         className={cn(
           'group relative overflow-hidden rounded-2xl border border-line bg-white shadow-card transition-all duration-200',
           'hover:shadow-lift hover:-translate-y-0.5',
-          isClaimed && 'opacity-70',
+          isClaimed && 'opacity-80',
         )}
       >
         {/* Image */}
@@ -37,7 +41,7 @@ export function GiftCard({ gift, owner }: { gift: Gift; owner: User }) {
             <TypeBadge type={gift.type} />
           </div>
           {isClaimed && (
-            <div className="absolute inset-0 bg-ink/40 backdrop-blur-[2px] flex items-center justify-center">
+            <div className="absolute inset-0 bg-ink/45 backdrop-blur-[2px] flex items-center justify-center">
               <div className="rounded-full bg-mint text-white px-3 py-1.5 text-xs font-semibold inline-flex items-center gap-1.5 shadow-lift">
                 <Check className="w-3.5 h-3.5" />
                 Claimed by {gift.claimed!.byName}
@@ -54,7 +58,7 @@ export function GiftCard({ gift, owner }: { gift: Gift; owner: User }) {
             </h3>
             {gift.price > 0 && (
               <div className="font-bold text-ink tabular-nums text-base whitespace-nowrap">
-                {formatCurrency(gift.price)}
+                {gift.type === 'cash' ? `~${formatCurrency(gift.price)}` : formatCurrency(gift.price)}
               </div>
             )}
           </div>
@@ -65,26 +69,51 @@ export function GiftCard({ gift, owner }: { gift: Gift; owner: User }) {
           )}
 
           {/* Pool progress */}
-          {gift.type === 'pool' && gift.pool && (
-            <div className="mb-4">
+          {gift.type === 'pool' && (
+            <div className="mb-3">
               <div className="flex items-baseline justify-between mb-2 text-xs">
                 <span className="text-muted">
-                  <span className="font-semibold text-ink">
-                    {formatCurrency(gift.pool.raised)}
+                  <span className="font-semibold text-ink tabular-nums">
+                    {formatCurrency(raised)}
                   </span>{' '}
-                  of {formatCurrency(gift.price)} ·{' '}
-                  {gift.pool.contributors} chipped in
+                  of {formatCurrency(gift.price)}
                 </span>
-                <span className="font-semibold text-rose tabular-nums">
+                <span className="font-bold text-rose tabular-nums">
                   {poolPct}%
                 </span>
               </div>
-              <div className="h-1.5 rounded-full bg-line overflow-hidden">
+              <div className="h-2 rounded-full bg-line overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-rose to-rose-soft transition-all duration-700"
-                  style={{ width: `${poolPct}%` }}
+                  className="h-full rounded-full transition-all duration-700"
+                  style={{
+                    width: `${poolPct}%`,
+                    background:
+                      'linear-gradient(90deg, #FCAF45 0%, #FD1D1D 35%, #E1306C 70%, #833AB4 100%)',
+                  }}
                 />
               </div>
+            </div>
+          )}
+
+          {/* Cash: running total */}
+          {gift.type === 'cash' && contributions.length > 0 && (
+            <div className="mb-3">
+              <div className="text-xs text-muted">
+                <span className="font-semibold text-ink tabular-nums">
+                  {formatCurrency(raised)}
+                </span>{' '}
+                sent so far
+              </div>
+            </div>
+          )}
+
+          {/* Contributors disclosure — shown for pool + cash */}
+          {(gift.type === 'pool' || gift.type === 'cash') && (
+            <div className="mb-4">
+              <ContributorsPopover
+                contributions={contributions}
+                label={gift.type === 'cash' ? 'sent cash' : 'chipped in'}
+              />
             </div>
           )}
 
@@ -101,7 +130,7 @@ export function GiftCard({ gift, owner }: { gift: Gift; owner: User }) {
                 {gift.type === 'item' && (
                   <>
                     <GiftIcon className="w-4 h-4" />
-                    I'll get this one
+                    I&apos;ll get this one
                   </>
                 )}
                 {gift.type === 'pool' && (
@@ -113,7 +142,7 @@ export function GiftCard({ gift, owner }: { gift: Gift; owner: User }) {
                 {gift.type === 'cash' && (
                   <>
                     <Heart className="w-4 h-4" />
-                    Send {formatCurrency(gift.price)}
+                    Send cash
                   </>
                 )}
               </button>

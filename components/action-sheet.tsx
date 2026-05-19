@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { X, ExternalLink, DollarSign } from 'lucide-react'
 import { cn, formatCurrency } from '@/lib/utils'
-import type { Gift, User } from '@/lib/mock-data'
+import { type Gift, type User, poolRaised } from '@/lib/mock-data'
 
 /**
  * Mobile-first bottom sheet (slides up on phones, centers on desktop).
@@ -20,7 +20,7 @@ export function ActionSheet({
 }) {
   const [amount, setAmount] = useState(
     gift.type === 'pool'
-      ? Math.min(50, gift.price - (gift.pool?.raised ?? 0))
+      ? Math.min(50, Math.max(10, gift.price - poolRaised(gift)))
       : gift.price,
   )
   const [name, setName] = useState('')
@@ -110,7 +110,7 @@ export function ActionSheet({
                     className="w-full rounded-xl border border-line bg-white pl-10 pr-4 py-3.5 text-lg font-semibold text-ink tabular-nums focus:outline-none focus:ring-2 focus:ring-rose/30 focus:border-rose"
                   />
                 </div>
-                {gift.type === 'pool' && gift.pool && (
+                {gift.type === 'pool' && (
                   <div className="flex gap-2 mt-3">
                     {[25, 50, 100].map((v) => (
                       <button

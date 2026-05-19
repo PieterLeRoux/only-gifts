@@ -66,15 +66,17 @@ export default async function PublicRegistryPage({
         <ProfileHeader user={user} />
 
         {/* Stats strip */}
-        <div className="px-5 sm:px-7 mb-6">
-          <div className="flex items-center justify-between text-xs text-muted">
-            <div className="inline-flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-rose" />
-              <span className="text-ink font-semibold">{totalGifts}</span> things on the list
+        <div className="px-5 sm:px-7 mt-8 mb-5">
+          <div className="flex items-center justify-between text-sm">
+            <div className="inline-flex items-center gap-1.5 text-ink">
+              <Sparkles className="w-4 h-4 text-rose" />
+              <span className="font-bold">{totalGifts}</span>
+              <span className="text-muted">items on the list</span>
             </div>
             {claimedCount > 0 && (
-              <div>
-                <span className="text-mint font-semibold">{claimedCount}</span> already claimed
+              <div className="text-muted">
+                <span className="text-mint font-bold">{claimedCount}</span>{' '}
+                already claimed
               </div>
             )}
           </div>

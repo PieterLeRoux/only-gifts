@@ -11,7 +11,7 @@ import {
   Trash2,
   Sparkles,
 } from 'lucide-react'
-import { MOCK_USERS } from '@/lib/mock-data'
+import { MOCK_USERS, poolRaised } from '@/lib/mock-data'
 import { cn, formatCurrency, daysUntil } from '@/lib/utils'
 import { CopyableLink } from '@/components/share-button'
 
@@ -82,7 +82,7 @@ export default function DashboardPage() {
             label="In group fund"
             value={`$${gifts
               .filter((g) => g.type === 'pool')
-              .reduce((sum, g) => sum + (g.pool?.raised ?? 0), 0)}`}
+              .reduce((sum, g) => sum + poolRaised(g), 0)}`}
             accent="rose"
           />
         </section>
@@ -132,9 +132,9 @@ export default function DashboardPage() {
                         Claimed by {gift.claimed.byName}
                       </span>
                     )}
-                    {gift.pool && (
+                    {gift.type === 'pool' && (
                       <span className="inline-flex items-center text-[11px] font-semibold text-rose">
-                        {formatCurrency(gift.pool.raised)} / {formatCurrency(gift.price)}
+                        {formatCurrency(poolRaised(gift))} / {formatCurrency(gift.price)}
                       </span>
                     )}
                   </div>
