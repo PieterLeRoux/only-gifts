@@ -64,68 +64,48 @@ export const MOCK_USERS: Record<string, User> = {
       {
         id: 'g1',
         type: 'pool',
-        title: 'Bose QuietComfort Ultra Headphones',
+        title: 'PlayStation 5 Pro — 2TB',
         description:
-          'The good ones. Active noise canceling for the office and the plane. Black.',
-        price: 429,
+          'The big one. 2TB internal, full Pro spec. Group-fund it and I\'ll name a save-file after each of you.',
+        price: 899,
         imageUrl:
-          'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=80',
+          'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=900&q=80',
         buyUrl:
-          'https://www.amazon.com/Bose-Cancelling-Bluetooth-Personalized-Cancellation/dp/B0CCZ1L489',
-        pool: { raised: 180, contributors: 4 },
+          'https://www.amazon.com/PlayStation-5-Pro-Console-2TB/dp/B0FTMY4YZ2',
+        pool: { raised: 120, contributors: 2 },
       },
       {
         id: 'g2',
         type: 'item',
-        title: 'A nice bottle of mezcal',
+        title: 'Glenmorangie 18 — The Infinita',
         description:
-          'Del Maguey Vida or Mezcal Vago Elote. Both around $40. Cigar bar energy.',
-        price: 42,
+          '18-year Highland single malt. 750ml. The good stuff for the cigar bar nights.',
+        price: 120,
         imageUrl:
-          'https://images.unsplash.com/photo-1569529465841-dfecdab7503b?auto=format&fit=crop&w=900&q=80',
-        buyUrl: 'https://www.totalwine.com/spirits/tequila/c/000909',
+          'https://images.unsplash.com/photo-1582819509237-d6cf2af52d97?auto=format&fit=crop&w=900&q=80',
+        buyUrl:
+          'https://www.totalwine.com/scotch/glenmorangie-18yr-the-infinita-750ml/p/2126252308-1',
       },
       {
         id: 'g3',
-        type: 'item',
-        title: 'Wilson Pro Staff 97 v14 tennis racket',
+        type: 'pool',
+        title: 'Vietnam trip — June 16–23',
         description:
-          'Just picked up tennis. Looking for an upgrade from the entry racket.',
-        price: 269,
+          'Going to Vietnam in June with the boys. Anything you chip in covers a dinner, a dive, a temple, a phở with my name on it. $2k target across the whole trip.',
+        price: 2000,
         imageUrl:
-          'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=900&q=80',
-        buyUrl: 'https://www.tennis-warehouse.com/Wilson_Pro_Staff_97_v14/descpageRCWILSON-PS97V14.html',
-        claimed: { byName: 'Erick P.', date: '2026-05-16' },
+          'https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=900&q=80',
+        pool: { raised: 320, contributors: 4 },
       },
       {
         id: 'g4',
-        type: 'item',
-        title: 'Theragun Mini',
-        description: 'Post-CrossFit. Tossing it in the gym bag.',
-        price: 199,
-        imageUrl:
-          'https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=900&q=80',
-        buyUrl: 'https://www.therabody.com/us/en-us/theragun-mini-gen-2.html',
-      },
-      {
-        id: 'g5',
         type: 'cash',
-        title: 'Toward the Vietnam trip',
+        title: 'Just send me cash',
         description:
-          'Heading to Vietnam in June with the boys. Any contribution toward dinners + a Phu Quoc day with Misia-equivalent dog content. 🐕',
+          'No item, no group, no judgment. Venmo, Cash App, or PayPal — pick your weapon.',
         price: 50,
         imageUrl:
-          'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=900&q=80',
-      },
-      {
-        id: 'g6',
-        type: 'item',
-        title: 'A handwritten letter',
-        description:
-          'Honestly. If you\'ve read this far, write me one thing you remember. Free. Worth more than the headphones.',
-        price: 0,
-        imageUrl:
-          'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=900&q=80',
+          'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=900&q=80',
       },
     ],
   },
